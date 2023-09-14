@@ -1,4 +1,4 @@
-name: "AUR publish docker"
+name: "AUR Publish"
 description: "Publish an AUR package"
 author: loqusion
 branding:
