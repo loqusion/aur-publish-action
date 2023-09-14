@@ -34,7 +34,7 @@ RUN chown -R builder:builder /home/builder && \
     chmod 600 /home/builder/.ssh/* -R
 
 # Copy entrypoint
-COPY entrypoint.sh /
+COPY entrypoint.sh /entrypoint.sh
 
 # Switch to non-root user and set workdir
 USER builder
