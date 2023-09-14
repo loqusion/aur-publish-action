@@ -2,8 +2,8 @@ name: "Yet Another AUR Publish"
 description: "Publish an AUR package"
 author: loqusion
 branding:
-  color: green
-  icon: upload
+  color: blue
+  icon: package
 inputs:
   ssh_private_key:
     description: "The private SSH key to use to push the changes to AUR"
