@@ -1,22 +1,42 @@
 FROM archlinux/archlinux:base
 
-RUN pacman -Sy && \
-    pacman -Sy --noconfirm openssh \
-    git fakeroot binutils go-pie gcc awk binutils xz \
-    libarchive bzip2 coreutils file findutils \
-    gettext grep gzip sed ncurses
+# Install dependencies
+RUN pacman --needed --noconfirm -Syu \
+    awk \
+    binutils \
+    bzip2 \
+    coreutils \
+    fakeroot \
+    file \
+    findutils \
+    gcc \
+    gettext \
+    git \
+    go-pie \
+    grep \
+    gzip \
+    libarchive \
+    ncurses \
+    openssh \
+    sed \
+    xz
 
-RUN useradd -ms /bin/bash builder && \
+# Create non-root user and add .ssh/known_hosts
+RUN useradd -m builder && \
     mkdir -p /home/builder/.ssh && \
     touch /home/builder/.ssh/known_hosts
 
+# Copy ssh_config
 COPY ssh_config /home/builder/.ssh/config
 
-RUN chown builder:builder /home/builder -R && \
+# Set permissions
+RUN chown -R builder:builder /home/builder && \
     chmod 600 /home/builder/.ssh/* -R
 
-COPY entrypoint.sh /entrypoint.sh
+# Copy entrypoint
+COPY entrypoint.sh /
 
+# Switch to non-root user and set workdir
 USER builder
 WORKDIR /home/builder
 
