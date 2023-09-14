@@ -5,16 +5,16 @@ branding:
   color: blue
   icon: package
 inputs:
-  ssh_private_key:
+  ssh-private-key:
     description: "The private SSH key to use to push the changes to AUR"
     required: true
-  package_name:
+  package-name:
     description: "AUR package name"
     default: ${{ github.event.repository.name }}
-  git_username:
+  git-username:
     description: "The username to use when creating the AUR repo commit"
     default: "AUR Release Action"
-  git_email:
+  git-email:
     description: "The email to use when creating the AUR repo commit"
     default: "github-action-bot@no-reply.com"
 
@@ -22,7 +22,7 @@ runs:
   using: "docker"
   image: "Dockerfile"
   args:
-    - ${{ inputs.package_name }}
-    - ${{ inputs.commit_username }}
-    - ${{ inputs.commit_email }}
-    - ${{ inputs.ssh_private_key }}
+    - ${{ inputs.package-name }}
+    - ${{ inputs.commit-username }}
+    - ${{ inputs.commit-email }}
+    - ${{ inputs.ssh-private-key }}
