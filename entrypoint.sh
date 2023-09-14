@@ -15,8 +15,8 @@ echo '::group::Configuring SSH'
 echo '::endgroup::'
 
 echo '::group::Configuring Git'
-git config --global user.name "$INPUT_COMMIT_USERNAME"
-git config --global user.email "$INPUT_COMMIT_EMAIL"
+git config --global user.name "$INPUT_GIT_USERNAME"
+git config --global user.email "$INPUT_GIT_EMAIL"
 echo '::endgroup::'
 
 echo "::group::Cloning $REPO_URL into /tmp/aur-repo"
