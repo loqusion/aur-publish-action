@@ -22,4 +22,7 @@ runs:
   using: "docker"
   image: "Dockerfile"
   args:
-    - ${{ inputs.package_name }} ${{ inputs.commit_username }} ${{ inputs.commit_email }} ${{ inputs.ssh_private_key }}
+    - ${{ inputs.package_name }}
+    - ${{ inputs.commit_username }}
+    - ${{ inputs.commit_email }}
+    - ${{ inputs.ssh_private_key }}

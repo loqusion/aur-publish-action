@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -l
 
 set -euo pipefail
 
@@ -6,9 +6,12 @@ PKGVER=${GITHUB_REF##*/v}
 REPO_URL="ssh://aur@aur.archlinux.org/${INPUT_PACKAGE_NAME}.git"
 
 echo '::group::Configuring SSH'
-ssh-keyscan -t ed25519 aur.archlinux.org >>"$HOME"/.ssh/known_hosts
-echo -e "${INPUT_SSH_PRIVATE_KEY//_/\\n}" >"$HOME"/.ssh/aur
-chmod 600 "$HOME"/.ssh/aur*
+(
+	umask 077
+	mkdir -p "$HOME/.ssh"
+	ssh-keyscan -t ed25519 aur.archlinux.org >>"$HOME/.ssh/known_hosts"
+	echo -e "${INPUT_SSH_PRIVATE_KEY//_/\\n}" >"$HOME/.ssh/aur"
+)
 echo '::endgroup::'
 
 echo '::group::Configuring Git'
