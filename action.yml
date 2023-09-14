@@ -1,0 +1,25 @@
+name: "AUR publish docker"
+description: "Publish an AUR package"
+author: loqusion
+branding:
+  color: green
+  icon: upload
+inputs:
+  package_name:
+    description: "AUR package name"
+    required: true
+  commit_username:
+    description: "The username to use when creating the new commit."
+    required: true
+  commit_email:
+    description: "The email to use when creating the new commit."
+    required: true
+  ssh_private_key:
+    description: "Your private key with access to AUR package."
+    required: true
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.package_name }} ${{ inputs.commit_username }} ${{ inputs.commit_email }} ${{ inputs.ssh_private_key }}
