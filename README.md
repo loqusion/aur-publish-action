@@ -37,3 +37,8 @@ jobs:
           git_username: me
           git_email: me@me.me
 ```
+
+## Credits
+
+[aur-release-action](https://github.com/0x61nas/aur-release-action)
+[aur-publish-action](https://github.com/zu1k/aur-publish-action)
