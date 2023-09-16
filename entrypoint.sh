@@ -32,6 +32,14 @@ makepkg -c
 makepkg --printsrcinfo >.SRCINFO
 echo '::endgroup::'
 
+echo '::group::PKGBUILD'
+cat PKGBUILD
+echo '::endgroup::'
+
+if [[ $INPUT_DEBUG == "true" ]]; then
+	exit 0
+fi
+
 echo '::group::Pushing to AUR'
 git add PKGBUILD .SRCINFO
 git diff-index --exit-code --quiet HEAD || {
