@@ -1,5 +1,15 @@
 #!/bin/bash -l
 
+echo "::group::Debug parameters"
+echo "These are the parameters:"
+echo "$@"
+echo "END"
+echo "env vars"
+printenv | grep 'INPUT_.*'
+echo "::endgroup::"
+
+exit 1
+
 set -euo pipefail
 
 PKGVER=${GITHUB_REF##*/v}
