@@ -26,6 +26,6 @@ runs:
   image: "Dockerfile"
   args:
     - ${{ inputs.package-name }}
-    - ${{ inputs.commit-username }}
-    - ${{ inputs.commit-email }}
+    - ${{ inputs.git-username }}
+    - ${{ inputs.git-email }}
     - ${{ inputs.ssh-private-key }}
