@@ -17,6 +17,9 @@ inputs:
   git-email:
     description: "The email to use when creating the AUR repo commit"
     default: "github-action-bot@no-reply.com"
+  debug:
+    description: "If true, doesn't actually publish"
+    default: false
 
 runs:
   using: "docker"
