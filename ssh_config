@@ -2,3 +2,4 @@ Host aur.archlinux.org
   IdentityFile ~/.ssh/aur
   IdentitiesOnly yes
   User aur
+  UserKnownHostsFile ~/.ssh/known_hosts
