@@ -16,8 +16,10 @@ echo '::group::Configuring SSH'
 echo '::endgroup::'
 
 echo '::group::DEBUG'
-cat ~/.ssh/aur | wc --bytes
-cat ~/.ssh/aur | wc --chars
+echo -n "NEWLINES: "
+tr -d -c $"\n" <~/.ssh/aur | wc -c
+echo -n "SPACES: "
+tr -d -c " " <~/.ssh/aur | wc -c
 echo '::endgroup::'
 
 echo '::group::Configuring Git'
