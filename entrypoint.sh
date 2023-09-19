@@ -22,6 +22,10 @@ echo -n "SPACES: "
 tr -d -c " " <~/.ssh/aur | wc -c
 echo -n "CHARACTERS: "
 wc -c <~/.ssh/aur
+echo "HOME:"
+ls -lA ~
+echo "SSH:"
+ls -lA ~/.ssh
 echo '::endgroup::'
 
 echo '::group::Configuring Git'
