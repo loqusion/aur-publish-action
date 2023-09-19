@@ -21,21 +21,6 @@ ssh-add "$SSH_PATH/aur"
 export GIT_SSH_COMMAND="ssh -i $SSH_PATH/aur -F $SSH_PATH/config -o UserKnownHostsFile=$SSH_PATH/known_hosts"
 echo '::endgroup::'
 
-echo '::group::DEBUG'
-echo -n "NEWLINES: "
-tr -d -c $"\n" <~/.ssh/aur | wc -c
-echo -n "SPACES: "
-tr -d -c " " <~/.ssh/aur | wc -c
-echo -n "CHARACTERS: "
-wc -c <~/.ssh/aur
-echo "HOME:"
-ls -lA ~
-echo "SSH:"
-ls -lA ~/.ssh
-echo "KNOWN HOSTS:"
-cat ~/.ssh/known_hosts
-echo '::endgroup::'
-
 echo '::group::Configuring Git'
 git config --global user.name "$INPUT_GIT_USERNAME"
 git config --global user.email "$INPUT_GIT_EMAIL"
