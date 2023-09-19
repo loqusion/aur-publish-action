@@ -16,6 +16,7 @@ export SSH_PATH="$HOME/.ssh"
 )
 cp /ssh_config "$SSH_PATH/config"
 chmod +r "$SSH_PATH/config"
+chmod +r "$SSH_PATH/known_hosts"
 eval "$(ssh-agent -s)"
 ssh-add "$SSH_PATH/aur"
 echo '::endgroup::'
