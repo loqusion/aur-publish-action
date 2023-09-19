@@ -41,10 +41,10 @@ echo '::endgroup::'
 echo "::group::Building PKGBUILD for $INPUT_PACKAGE_NAME version $PKGVER"
 sed -i "s/pkgver=.*$/pkgver=$PKGVER/" PKGBUILD
 sed -i "s/pkgrel=.*$/pkgrel=1/" PKGBUILD
-sha256sums=$(su nobody -c 'makepkg -g')
+sha256sums=$(makepkg -g)
 perl -i -0pe "s/sha256sums=[\s\S][^\)]*\)/${sha256sums}/" PKGBUILD
-su nobody -c 'makepkg -c'
-su nobody -c 'makepkg --printsrcinfo >.SRCINFO'
+makepkg -c
+makepkg --printsrcinfo >.SRCINFO
 echo '::endgroup::'
 
 echo '::group::PKGBUILD'
