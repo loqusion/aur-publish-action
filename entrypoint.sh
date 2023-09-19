@@ -30,7 +30,7 @@ git config --global user.email "$INPUT_GIT_EMAIL"
 echo '::endgroup::'
 
 echo "::group::Cloning $REPO_URL into /tmp/aur-repo"
-git clone "$REPO_URL" "/tmp/aur-repo"
+git clone -v "$REPO_URL" "/tmp/aur-repo"
 cd "/tmp/aur-repo"
 echo '::endgroup::'
 
