@@ -32,10 +32,11 @@ git clone -v "$REPO_URL" "/tmp/aur-repo"
 cd "/tmp/aur-repo"
 echo '::endgroup::'
 
-echo "::group::Building PKGBUILD for $INPUT_PACKAGE_NAME"
+echo "::group::Building PKGBUILD for $INPUT_PACKAGE_NAME version $PKGVER"
 sed -i "s/pkgver=.*$/pkgver=$PKGVER/" PKGBUILD
 sed -i "s/pkgrel=.*$/pkgrel=1/" PKGBUILD
-perl -i -0pe "s/sha256sums=[\s\S][^\)]*\)/$(makepkg -g 2>/dev/null)/" PKGBUILD
+sha256sums=$(makepkg -g 2>/dev/null)
+perl -i -0pe "s/sha256sums=[\s\S][^\)]*\)/${sha256sums}/" PKGBUILD
 makepkg -c
 makepkg --printsrcinfo >.SRCINFO
 echo '::endgroup::'
