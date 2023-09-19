@@ -20,6 +20,8 @@ echo -n "NEWLINES: "
 tr -d -c $"\n" <~/.ssh/aur | wc -c
 echo -n "SPACES: "
 tr -d -c " " <~/.ssh/aur | wc -c
+echo -n "CHARACTERS: "
+wc -c <~/.ssh/aur
 echo '::endgroup::'
 
 echo '::group::Configuring Git'
