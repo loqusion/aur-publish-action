@@ -6,14 +6,17 @@ PKGVER=${GITHUB_REF##*/v}
 REPO_URL="ssh://aur@aur.archlinux.org/${INPUT_PACKAGE_NAME}.git"
 
 echo '::group::Configuring SSH'
+export SSH_PATH="$HOME/.ssh"
 (
 	umask 077
-	mkdir -p "$HOME/.ssh"
-	ssh-keyscan -t ed25519 aur.archlinux.org >>"$HOME/.ssh/known_hosts"
-	echo -e "${INPUT_SSH_PRIVATE_KEY//_/\\n}" >"$HOME/.ssh/aur"
-	cp /ssh_config "$HOME/.ssh/config"
+	mkdir -p "$SSH_PATH"
+	ssh-keyscan -t ed25519 aur.archlinux.org >>"$SSH_PATH/known_hosts"
+	echo -e "${INPUT_SSH_PRIVATE_KEY//_/\\n}" >"$SSH_PATH/aur"
 )
-chmod +r "$HOME/.ssh/config"
+cp /ssh_config "$SSH_PATH/config"
+chmod +r "$SSH_PATH/config"
+eval "$(ssh-agent -s)"
+ssh-add "$SSH_PATH/aur"
 echo '::endgroup::'
 
 echo '::group::DEBUG'
