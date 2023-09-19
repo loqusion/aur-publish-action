@@ -27,7 +27,6 @@ git config --global user.email "$INPUT_GIT_EMAIL"
 echo '::endgroup::'
 
 echo "::group::Cloning $REPO_URL into /tmp/aur-repo"
-# FIXME: Not working ("Host key verification failed")
 git clone -v "$REPO_URL" "/tmp/aur-repo"
 cd "/tmp/aur-repo"
 echo '::endgroup::'
