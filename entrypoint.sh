@@ -3,6 +3,8 @@
 set -euo pipefail
 
 PKGVER=${GITHUB_REF##*/v}
+# Escape for sed
+PKGVER=$(printf '%s\n' "$PKGVER" | sed -e 's/[\/&]/\\&/g')
 HOST_URL="aur.archlinux.org"
 REPO_URL="ssh://aur@${HOST_URL}/${INPUT_PACKAGE_NAME}.git"
 
