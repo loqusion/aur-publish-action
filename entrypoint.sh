@@ -34,10 +34,6 @@ git clone -v "$REPO_URL" "/tmp/aur-repo"
 cd "/tmp/aur-repo"
 echo '::endgroup::'
 
-echo "::group::Cloning $REPO_URL into /tmp/aur-repo"
-cat /etc/passwd
-echo '::endgroup::'
-
 echo "::group::Building PKGBUILD for $INPUT_PACKAGE_NAME version $PKGVER"
 sed -i "s/pkgver=.*$/pkgver=$PKGVER/" PKGBUILD
 sed -i "s/pkgrel=.*$/pkgrel=1/" PKGBUILD
