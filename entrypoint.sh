@@ -2,6 +2,7 @@
 
 set -euo pipefail
 
+export HOME=/home/builder
 PKGVER=${GITHUB_REF##*/v}
 # Escape for sed
 PKGVER=$(printf '%s\n' "$PKGVER" | sed -e 's/[\/&]/\\&/g')

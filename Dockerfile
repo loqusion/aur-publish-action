@@ -30,6 +30,5 @@ COPY entrypoint.sh /entrypoint.sh
 
 USER builder
 WORKDIR /home/builder
-ENV HOME=/home/builder
 
 ENTRYPOINT ["/entrypoint.sh"]
