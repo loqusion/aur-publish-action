@@ -3,14 +3,15 @@
 set -euo pipefail
 
 PKGVER=${GITHUB_REF##*/v}
-REPO_URL="ssh://aur@aur.archlinux.org/${INPUT_PACKAGE_NAME}.git"
+HOST_URL="aur.archlinux.org"
+REPO_URL="ssh://aur@${HOST_URL}/${INPUT_PACKAGE_NAME}.git"
 
 echo '::group::Configuring SSH'
 export SSH_PATH="$HOME/.ssh"
 (
 	umask 077
 	mkdir -p "$SSH_PATH"
-	ssh-keyscan -t ed25519 aur.archlinux.org >>"$SSH_PATH/known_hosts"
+	ssh-keyscan -t ed25519 "$HOST_URL" >>"$SSH_PATH/known_hosts"
 	echo -e "${INPUT_SSH_PRIVATE_KEY//_/\\n}" >"$SSH_PATH/aur"
 )
 cp /ssh_config "$SSH_PATH/config"
@@ -30,6 +31,8 @@ echo "HOME:"
 ls -lA ~
 echo "SSH:"
 ls -lA ~/.ssh
+echo "KNOWN HOSTS:"
+cat ~/.ssh/known_hosts
 echo '::endgroup::'
 
 echo '::group::Configuring Git'
