@@ -16,9 +16,9 @@ export SSH_PATH="$HOME/.ssh"
 )
 cp /ssh_config "$SSH_PATH/config"
 chmod +r "$SSH_PATH/config"
-chmod +r "$SSH_PATH/known_hosts"
 eval "$(ssh-agent -s)"
 ssh-add "$SSH_PATH/aur"
+export GIT_SSH_COMMAND="ssh -i $SSH_PATH/aur -F $SSH_PATH/config -o UserKnownHostsFile=$SSH_PATH/known_hosts"
 echo '::endgroup::'
 
 echo '::group::DEBUG'
@@ -42,6 +42,7 @@ git config --global user.email "$INPUT_GIT_EMAIL"
 echo '::endgroup::'
 
 echo "::group::Cloning $REPO_URL into /tmp/aur-repo"
+# FIXME: Not working ("Host key verification failed")
 git clone -v "$REPO_URL" "/tmp/aur-repo"
 cd "/tmp/aur-repo"
 echo '::endgroup::'
