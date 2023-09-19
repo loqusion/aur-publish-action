@@ -15,6 +15,11 @@ echo '::group::Configuring SSH'
 )
 echo '::endgroup::'
 
+echo '::group::DEBUG'
+cat ~/.ssh/aur | wc --bytes
+cat ~/.ssh/aur | wc --chars
+echo '::endgroup::'
+
 echo '::group::Configuring Git'
 git config --global user.name "$INPUT_GIT_USERNAME"
 git config --global user.email "$INPUT_GIT_EMAIL"
@@ -38,6 +43,7 @@ cat PKGBUILD
 echo '::endgroup::'
 
 if [[ $INPUT_DEBUG == "true" ]]; then
+	echo 'DEBUG is enabled, exiting early.'
 	exit 0
 fi
 
