@@ -1,5 +1,7 @@
 # AUR Publish
 
+> WARNING: This is very much a work-in-progress.
+
 ## Inputs
 
 | Name                | Description                                           | Default                              |
