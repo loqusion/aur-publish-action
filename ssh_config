@@ -1,3 +1,4 @@
 Host aur.archlinux.org
   IdentityFile ~/.ssh/aur
+  IdentitiesOnly yes
   User aur
