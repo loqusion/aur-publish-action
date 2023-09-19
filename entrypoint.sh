@@ -12,8 +12,8 @@ echo '::group::Configuring SSH'
 	ssh-keyscan -t ed25519 aur.archlinux.org >>"$HOME/.ssh/known_hosts"
 	echo -e "${INPUT_SSH_PRIVATE_KEY//_/\\n}" >"$HOME/.ssh/aur"
 	cp /ssh_config "$HOME/.ssh/config"
-	chmod +r "$HOME/.ssh/config"
 )
+chmod +r "$HOME/.ssh/config"
 echo '::endgroup::'
 
 echo '::group::DEBUG'
