@@ -18,6 +18,7 @@ get_version() {
 
 VERSION=$(get_version)
 PKGVER=${VERSION##*/v}
+echo "Version: $VERSION" >&2
 
 export SSH_PATH="$HOME/.ssh"
 # shellcheck disable=SC2174
