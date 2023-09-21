@@ -1,6 +1,8 @@
 #!/bin/bash -l
 set -euo pipefail
 
+echo "::debug::$(stat /github/workspace)"
+
 HOST_URL="aur.archlinux.org"
 REPO_URL="ssh://aur@${HOST_URL}/${INPUT_PACKAGE_NAME}.git"
 
