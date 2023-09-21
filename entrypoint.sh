@@ -13,9 +13,9 @@ done
 VERSION=$GITHUB_REF
 if [[ $GITHUB_EVENT_NAME = "workflow_dispatch" ]]; then
 	echo "Attempting to resolve version from ref $GITHUB_REF"
-	sudo git -C "$GITHUB_WORKSPACE" fetch --tags
+	git -C "$GITHUB_WORKSPACE" fetch --tags
 	# git config --global --add safe.directory "$GITHUB_WORKSPACE"
-	VERSION=$(sudo git -C "$GITHUB_WORKSPACE" describe --abbr=0 "$GITHUB_REF")
+	VERSION=$(git -C "$GITHUB_WORKSPACE" describe --abbr=0 "$GITHUB_REF")
 fi
 
 PKGVER=${VERSION##*/v}
