@@ -26,6 +26,8 @@ RUN useradd -m builder && \
     echo "%wheel ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers && \
     usermod -a -G wheel builder
 
+RUN chown root:root /github/workspace
+
 COPY ssh_config /ssh_config
 COPY entrypoint-rewrite.sh /entrypoint.sh
 
