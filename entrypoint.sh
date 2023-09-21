@@ -8,7 +8,8 @@ for x in "${!GITHUB_@}"; do
 done
 
 export HOME=/home/builder
-VERSION=$(git describe --abbr=0 "$GITHUB_REF")
+git config --global --add safe.directory "$GITHUB_WORKSPACE"
+VERSION=$(git -C "$GITHUB_WORKSPACE" describe --abbr=0 "$GITHUB_REF")
 PKGVER=${VERSION##*/v}
 HOST_URL="aur.archlinux.org"
 REPO_URL="ssh://aur@${HOST_URL}/${INPUT_PACKAGE_NAME}.git"
