@@ -9,13 +9,12 @@ for x in "${!GITHUB_@}"; do
 	echo "$x" "${!x}"
 done
 
-git config --global --add safe.directory "$GITHUB_WORKSPACE"
-
 VERSION=$GITHUB_REF
 if [[ $GITHUB_EVENT_NAME = "workflow_dispatch" ]]; then
 	echo "Attempting to resolve version from ref $GITHUB_REF"
 	sudo git -C "$GITHUB_WORKSPACE" fetch --tags
-	VERSION=$(git -C "$GITHUB_WORKSPACE" describe --abbr=0 "$GITHUB_REF")
+	# git config --global --add safe.directory "$GITHUB_WORKSPACE"
+	VERSION=$(sudo git -C "$GITHUB_WORKSPACE" describe --abbr=0 "$GITHUB_REF")
 fi
 
 PKGVER=${VERSION##*/v}
