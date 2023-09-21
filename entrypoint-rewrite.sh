@@ -1,6 +1,8 @@
 #!/bin/bash -l
 set -euo pipefail
 
+USER=$(whoami)
+
 chown -R "${USER}:${USER}" "$GITHUB_WORKSPACE"
 
 echo "::debug::$(stat /github/workspace)"
