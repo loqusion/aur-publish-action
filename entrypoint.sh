@@ -13,9 +13,9 @@ done
 VERSION=$GITHUB_REF
 if [[ $GITHUB_EVENT_NAME = "workflow_dispatch" ]]; then
 	echo "Attempting to resolve version from ref $GITHUB_REF"
-	sudo -u root git -C "$GITHUB_WORKSPACE" fetch --tags
+	git -C "$GITHUB_WORKSPACE" fetch --tags
 	# git config --global --add safe.directory "$GITHUB_WORKSPACE"
-	VERSION=$(sudo git -C "$GITHUB_WORKSPACE" describe --abbr=0 "$GITHUB_REF")
+	VERSION=$(git -C "$GITHUB_WORKSPACE" describe --abbr=0 "$GITHUB_REF")
 fi
 
 PKGVER=${VERSION##*/v}
@@ -54,10 +54,11 @@ echo "::group::Building PKGBUILD for $INPUT_PACKAGE_NAME $PKGVER"
 PKGVER_SED=$(printf '%s\n' "$PKGVER" | sed -e 's/[\/&]/\\&/g')
 sed -i "s/pkgver=.*$/pkgver=$PKGVER_SED/" PKGBUILD
 sed -i "s/pkgrel=.*$/pkgrel=1/" PKGBUILD
-sha256sums=$(makepkg -g)
+sha256sums=$(sudo -u builder makepkg -g)
 perl -i -0pe "s/sha256sums=[\s\S][^\)]*\)/${sha256sums}/" PKGBUILD
-makepkg -c
-makepkg --printsrcinfo >.SRCINFO
+sudo -u builder makepkg -c
+# shellcheck disable=SC2024
+sudo -u builder makepkg --printsrcinfo >.SRCINFO
 echo '::endgroup::'
 
 echo '::group::PKGBUILD'

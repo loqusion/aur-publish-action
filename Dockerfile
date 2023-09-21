@@ -29,6 +29,4 @@ RUN useradd -m builder && \
 COPY ssh_config /ssh_config
 COPY entrypoint.sh /entrypoint.sh
 
-USER builder
-
 ENTRYPOINT ["/entrypoint.sh"]
