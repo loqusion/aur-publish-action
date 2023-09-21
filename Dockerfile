@@ -27,6 +27,6 @@ RUN useradd -m builder && \
     usermod -a -G wheel builder
 
 COPY ssh_config /ssh_config
-COPY entrypoint.sh /entrypoint.sh
+COPY entrypoint-rewrite.sh /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
