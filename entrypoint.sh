@@ -3,6 +3,9 @@
 set -euo pipefail
 
 ls -lA
+for x in "${!GITHUB_@}"; do
+	echo "$x" "${!x}"
+done
 
 export HOME=/home/builder
 VERSION=$(git describe --abbr=0 "$GITHUB_REF")
