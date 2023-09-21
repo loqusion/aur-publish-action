@@ -18,6 +18,7 @@ RUN pacman --needed --noconfirm -Syu \
     ncurses \
     openssh \
     sed \
+    sudo \
     xz
 
 RUN useradd -m builder && \
