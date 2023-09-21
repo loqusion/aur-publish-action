@@ -24,13 +24,11 @@ RUN pacman --needed --noconfirm -Syu \
 RUN useradd -m builder && \
     echo "builder ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers && \
     echo "%wheel ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers && \
-    usermod -a -G wheel builder && \
-    cp -r /github/workspace /home/builder/workspace
+    usermod -a -G wheel builder
 
 COPY ssh_config /ssh_config
 COPY entrypoint.sh /entrypoint.sh
 
 USER builder
-WORKDIR /home/builder/workspace
 
 ENTRYPOINT ["/entrypoint.sh"]
