@@ -1,6 +1,9 @@
 #!/bin/bash -l
 set -euo pipefail
 
+ls -lA /
+ls -lA /github
+
 USER=$(whoami)
 
 chown -R "${USER}:${USER}" "$GITHUB_WORKSPACE"
@@ -24,7 +27,7 @@ get_version() {
 
 VERSION=$(get_version)
 PKGVER=${VERSION##*/v}
-echo "Version: $VERSION" >&2
+echo "Version: $VERSION"
 
 export SSH_PATH="$HOME/.ssh"
 # shellcheck disable=SC2174
