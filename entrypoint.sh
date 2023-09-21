@@ -13,6 +13,7 @@ done
 VERSION=$GITHUB_REF
 if [[ $GITHUB_EVENT_NAME = "workflow_dispatch" ]]; then
 	echo "Attempting to resolve version from ref $GITHUB_REF"
+	chown root:root "$GITHUB_WORKSPACE"
 	git -C "$GITHUB_WORKSPACE" fetch --tags
 	# git config --global --add safe.directory "$GITHUB_WORKSPACE"
 	VERSION=$(git -C "$GITHUB_WORKSPACE" describe --abbr=0 "$GITHUB_REF")
