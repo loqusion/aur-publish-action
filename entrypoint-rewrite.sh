@@ -2,7 +2,8 @@
 set -euo pipefail
 
 ls -lA /
-ls -lA /github
+
+echo "$GITHUB_WORKSPACE"
 
 USER=$(whoami)
 
