@@ -2,6 +2,8 @@
 
 set -euo pipefail
 
+ls -lA
+
 export HOME=/home/builder
 VERSION=$(git describe --abbr=0 "$GITHUB_REF")
 PKGVER=${VERSION##*/v}
