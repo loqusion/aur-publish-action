@@ -3,9 +3,8 @@
 set -euo pipefail
 
 export HOME=/home/builder
-PKGVER=${GITHUB_REF##*/v}
-# Escape for sed
-PKGVER=$(printf '%s\n' "$PKGVER" | sed -e 's/[\/&]/\\&/g')
+VERSION=$(git describe --abbr=0 "$GITHUB_REF")
+PKGVER=${VERSION##*/v}
 HOST_URL="aur.archlinux.org"
 REPO_URL="ssh://aur@${HOST_URL}/${INPUT_PACKAGE_NAME}.git"
 
@@ -29,13 +28,15 @@ git config --global user.name "$INPUT_GIT_USERNAME"
 git config --global user.email "$INPUT_GIT_EMAIL"
 echo '::endgroup::'
 
-echo "::group::Cloning $REPO_URL into /tmp/aur-repo"
+echo "::group::Cloning $REPO_URL"
 git clone -v "$REPO_URL" "/tmp/aur-repo"
 cd "/tmp/aur-repo"
 echo '::endgroup::'
 
-echo "::group::Building PKGBUILD for $INPUT_PACKAGE_NAME version $PKGVER"
-sed -i "s/pkgver=.*$/pkgver=$PKGVER/" PKGBUILD
+echo "::group::Building PKGBUILD for $INPUT_PACKAGE_NAME $PKGVER"
+# Escape for sed
+PKGVER_SED=$(printf '%s\n' "$PKGVER" | sed -e 's/[\/&]/\\&/g')
+sed -i "s/pkgver=.*$/pkgver=$PKGVER_SED/" PKGBUILD
 sed -i "s/pkgrel=.*$/pkgrel=1/" PKGBUILD
 sha256sums=$(makepkg -g)
 perl -i -0pe "s/sha256sums=[\s\S][^\)]*\)/${sha256sums}/" PKGBUILD
