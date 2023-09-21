@@ -4,6 +4,7 @@ set -euo pipefail
 export HOME=/home/builder
 
 # DEBUG
+pwd
 ls -lA
 for x in "${!GITHUB_@}"; do
 	echo "$x" "${!x}"
