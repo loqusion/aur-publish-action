@@ -67,7 +67,7 @@ update_pkgbuild() {
 	sed -i "s/pkgver=.*$/pkgver=$pkgver_sed_escaped/" PKGBUILD
 	sed -i "s/pkgrel=.*$/pkgrel=1/" PKGBUILD
 	sudo -u builder updpkgsums
-	sudo -u builder makepkg -c
+	sudo -u builder makepkg -cs
 	# shellcheck disable=SC2024
 	sudo -u builder makepkg --printsrcinfo >.SRCINFO
 }
