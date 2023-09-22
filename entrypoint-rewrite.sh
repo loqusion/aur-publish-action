@@ -20,7 +20,7 @@ get_version() {
 		version=$GITHUB_REF
 	else
 		echo "Attempting to resolve version from ref $GITHUB_REF"
-		git -C "$GITHUB_WORKSPACE" fetch --tags
+		git -C "$GITHUB_WORKSPACE" fetch --tags --depth=100
 		version=$(git -C "$GITHUB_WORKSPACE" describe --abbr=0 "$GITHUB_REF")
 	fi >&2
 	echo "$version"
