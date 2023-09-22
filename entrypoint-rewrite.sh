@@ -2,14 +2,13 @@
 set -euo pipefail
 
 ls -lA /
-
-echo "$GITHUB_WORKSPACE"
+for x in "${!GITHUB_@}"; do
+	echo "$x" "${!x}"
+done
 
 USER=$(whoami)
 
 chown -R "${USER}:${USER}" "$GITHUB_WORKSPACE"
-
-echo "::debug::$(stat /github/workspace)"
 
 HOST_URL="aur.archlinux.org"
 REPO_URL="ssh://aur@${HOST_URL}/${INPUT_PACKAGE_NAME}.git"
