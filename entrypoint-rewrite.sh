@@ -52,6 +52,7 @@ setup_ssh() {
 }
 
 clone_aur_repo() {
+	# shellcheck disable=SC2030
 	(
 		export GIT_SSH_COMMAND="ssh -i $SSH_PATH/aur.key -F $SSH_PATH/config -o UserKnownHostsFile=$SSH_PATH/known_hosts"
 		git clone -v "$REPO_URL" "/tmp/aur-repo"
@@ -67,12 +68,12 @@ update_pkgbuild() {
 	sed -i "s/pkgver=.*$/pkgver=$pkgver_sed_escaped/" PKGBUILD
 	sed -i "s/pkgrel=.*$/pkgrel=1/" PKGBUILD
 	sudo -u builder updpkgsums
-	sudo -u builder makepkg -cs
-	# shellcheck disable=SC2024
-	sudo -u builder makepkg --printsrcinfo >.SRCINFO
+	sudo -u builder makepkg -cs --needed --noconfirm
+	sudo -u builder makepkg --printsrcinfo | sudo -u builder tee .SRCINFO
 }
 
 push_to_aur() {
+	# shellcheck disable=SC2031
 	(
 		export GIT_SSH_COMMAND="ssh -i $SSH_PATH/aur.key -F $SSH_PATH/config -o UserKnownHostsFile=$SSH_PATH/known_hosts"
 		git add PKGBUILD .SRCINFO
