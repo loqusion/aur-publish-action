@@ -3,7 +3,7 @@ set -euo pipefail
 
 ls -lA /
 for x in "${!GITHUB_@}"; do
-	echo "$x" "${!x}"
+	echo "::debug::$x" "${!x}"
 done
 
 USER=$(whoami)
