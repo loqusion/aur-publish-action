@@ -1,5 +1,5 @@
 name: "Yet Another AUR Publish"
-description: "Publish an AUR package"
+description: "Dead simple AUR publisher"
 author: loqusion
 branding:
   color: blue

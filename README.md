@@ -1,6 +1,9 @@
 # AUR Publish
 
-> WARNING: This is very much a work-in-progress.
+Publish a package to the Arch User Repository (AUR) on GitHub release.
+
+In total, this action will clone the AUR package repository, update the `PKGBUILD`/`.SRCINFO`,
+verify build, and push to AUR.
 
 ## Inputs
 
