@@ -34,6 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: AUR
     steps:
+      - uses: actions/checkout@v3
       - uses: loqusion/aur-publish-action@v1
         with:
           ssh-private-key: ${{ secrets.AUR_SSH_PRIVATE_KEY }}
