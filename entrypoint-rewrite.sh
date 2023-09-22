@@ -68,8 +68,11 @@ update_pkgbuild() {
 	sed -i "s/pkgver=.*$/pkgver=$pkgver_sed_escaped/" PKGBUILD
 	sed -i "s/pkgrel=.*$/pkgrel=1/" PKGBUILD
 	sudo -u builder updpkgsums
-	sudo -u builder makepkg -cs --needed --noconfirm
 	sudo -u builder makepkg --printsrcinfo | sudo -u builder tee .SRCINFO
+}
+
+build_pkg() {
+	sudo -u builder makepkg --syncdeps --cleanbuild --needed --noconfirm
 }
 
 push_to_aur() {
@@ -77,8 +80,10 @@ push_to_aur() {
 	(
 		export GIT_SSH_COMMAND="ssh -i $SSH_PATH/aur.key -F $SSH_PATH/config -o UserKnownHostsFile=$SSH_PATH/known_hosts"
 		git add PKGBUILD .SRCINFO
-		git commit -m "Update to $PKGVER"
-		git push
+		git diff-index --exit-code --quiet HEAD || {
+			git commit -m "chore: bump version to $PKGVER"
+			git push && echo "::warning::Pushed to AUR"
+		}
 	)
 }
 
@@ -91,5 +96,6 @@ act_group_end
 act_group 'Configure SSH' setup_ssh
 act_group "Clone AUR repository @ $REPO_URL" clone_aur_repo
 act_group "Update PKGBUILD for $INPUT_PACKAGE_NAME $PKGVER" update_pkgbuild
+act_group "Build package" build_pkg
 act_group "PKGBUILD" cat PKGBUILD
 # act_group "Push to AUR" push_to_aur
