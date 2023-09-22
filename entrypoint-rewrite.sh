@@ -1,10 +1,6 @@
 #!/bin/bash -l
 set -euo pipefail
 
-for x in "${!GITHUB_@}"; do
-	echo "::debug::$x" "${!x}"
-done
-
 USER=$(whoami)
 chown -R "${USER}:${USER}" "$GITHUB_WORKSPACE"
 
