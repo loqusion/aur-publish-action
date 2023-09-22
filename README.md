@@ -42,6 +42,6 @@ jobs:
 
 ## Credits
 
-[aur-release-action](https://github.com/0x61nas/aur-release-action)
-[aur-publish-action](https://github.com/zu1k/aur-publish-action)
-[github-action-push-to-another-repository](https://github.com/cpina/github-action-push-to-another-repository)
+- [aur-release-action](https://github.com/0x61nas/aur-release-action)
+- [aur-publish-action](https://github.com/zu1k/aur-publish-action)
+- [github-action-push-to-another-repository](https://github.com/cpina/github-action-push-to-another-repository)
