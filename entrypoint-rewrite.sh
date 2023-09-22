@@ -80,10 +80,13 @@ push_to_aur() {
 	(
 		export GIT_SSH_COMMAND="ssh -i $SSH_PATH/aur.key -F $SSH_PATH/config -o UserKnownHostsFile=$SSH_PATH/known_hosts"
 		git add PKGBUILD .SRCINFO
-		git diff-index --exit-code --quiet HEAD || {
+		if git diff-index --exit-code --quiet HEAD; then
+			echo "::warning::No changes to PKGBUILD or .SRCINFO"
+		else
 			git commit -m "chore: bump version to $PKGVER"
-			git push && echo "::warning::Pushed to AUR"
-		}
+			git push
+			echo "::warning::Pushed to AUR"
+		fi
 	)
 }
 
