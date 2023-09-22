@@ -6,7 +6,6 @@ for x in "${!GITHUB_@}"; do
 done
 
 USER=$(whoami)
-
 chown -R "${USER}:${USER}" "$GITHUB_WORKSPACE"
 
 HOST_URL="aur.archlinux.org"
@@ -56,6 +55,7 @@ clone_aur_repo() {
 	(
 		export GIT_SSH_COMMAND="ssh -i $SSH_PATH/aur.key -F $SSH_PATH/config -o UserKnownHostsFile=$SSH_PATH/known_hosts"
 		git clone -v "$REPO_URL" "/tmp/aur-repo"
+		chown -R builder:builder "/tmp/aur-repo"
 	)
 	cd "/tmp/aur-repo"
 }
