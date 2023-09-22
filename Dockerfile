@@ -17,6 +17,7 @@ RUN pacman --needed --noconfirm -Syu \
     libarchive \
     ncurses \
     openssh \
+    pacman-contrib \
     sed \
     sudo \
     xz
