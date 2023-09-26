@@ -25,7 +25,7 @@ act_group_end() {
 get_version() {
 	local version
 	if [[ $GITHUB_REF_TYPE = "tag" ]]; then
-		version=$GITHUB_REF
+		version=${GITHUB_REF##*\/}
 	else
 		echo "Attempting to resolve version from ref $GITHUB_REF"
 		git -C "$GITHUB_WORKSPACE" fetch --tags --unshallow
