@@ -97,4 +97,4 @@ act_group "Clone AUR repository @ $REPO_URL" clone_aur_repo
 act_group "Update PKGBUILD for $INPUT_PACKAGE_NAME $PKGVER" update_pkgbuild
 act_group "Build package" build_pkg
 act_group "PKGBUILD" cat PKGBUILD
-# act_group "Push to AUR" push_to_aur
+act_group "Push to AUR" push_to_aur
