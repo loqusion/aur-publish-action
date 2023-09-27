@@ -73,6 +73,8 @@ build_pkg() {
 
 push_to_aur() {
 	chown -R "$ROOT_USER:$ROOT_USER" .
+	git config user.email "$INPUT_GIT_EMAIL"
+	git config user.name "$INPUT_GIT_USERNAME"
 	# shellcheck disable=SC2031
 	(
 		export GIT_SSH_COMMAND="ssh -i $SSH_PATH/aur.key -F $SSH_PATH/config -o UserKnownHostsFile=$SSH_PATH/known_hosts"
