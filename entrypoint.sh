@@ -65,7 +65,6 @@ update_pkgbuild() {
 	sed -i "s/pkgrel=.*$/pkgrel=1/" PKGBUILD
 	sudo -u builder updpkgsums
 	sudo -u builder makepkg --printsrcinfo | sudo -u builder tee .SRCINFO
-	chown -R "$ROOT_USER:$ROOT_USER" .
 }
 
 build_pkg() {
@@ -73,6 +72,7 @@ build_pkg() {
 }
 
 push_to_aur() {
+	chown -R "$ROOT_USER:$ROOT_USER" .
 	# shellcheck disable=SC2031
 	(
 		export GIT_SSH_COMMAND="ssh -i $SSH_PATH/aur.key -F $SSH_PATH/config -o UserKnownHostsFile=$SSH_PATH/known_hosts"
