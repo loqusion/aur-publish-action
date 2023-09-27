@@ -1,8 +1,8 @@
 #!/bin/bash -l
 set -euo pipefail
 
-USER=$(whoami)
-chown -R "${USER}:${USER}" "$GITHUB_WORKSPACE"
+ROOT_USER=$(whoami)
+chown -R "${ROOT_USER}:${ROOT_USER}" "$GITHUB_WORKSPACE"
 
 HOST_URL="aur.archlinux.org"
 REPO_URL="ssh://aur@${HOST_URL}/${INPUT_PACKAGE_NAME}.git"
@@ -65,6 +65,7 @@ update_pkgbuild() {
 	sed -i "s/pkgrel=.*$/pkgrel=1/" PKGBUILD
 	sudo -u builder updpkgsums
 	sudo -u builder makepkg --printsrcinfo | sudo -u builder tee .SRCINFO
+	chown -R "$ROOT_USER:$ROOT_USER" .
 }
 
 build_pkg() {
