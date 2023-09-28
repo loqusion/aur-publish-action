@@ -35,7 +35,7 @@ jobs:
     environment: AUR
     steps:
       - uses: actions/checkout@v3
-      - uses: loqusion/aur-publish-action@v1
+      - uses: loqusion/aur-publish-action@v2
         with:
           ssh-private-key: ${{ secrets.AUR_SSH_PRIVATE_KEY }}
           # the rest are optional
